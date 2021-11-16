@@ -1,16 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import HomePage from '@pages/Home';
+import Axios from 'axios';
 import reportWebVitals from './reportWebVitals';
+import App from './components/App';
+
+Axios.defaults.baseURL = 'http://localhost:8000/v1';
+Axios.defaults.headers.common['token-admin'] = '827b~cmzD:;f9#dC~;UqL}WD9BL';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Route path="/">
-        <HomePage />
-      </Route>
-    </BrowserRouter>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
