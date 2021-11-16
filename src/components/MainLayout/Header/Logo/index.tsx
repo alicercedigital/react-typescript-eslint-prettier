@@ -1,11 +1,8 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 
 const Logo = () => (
   <Grid container justifyContent="center" alignItems="center" direction="column" marginTop={1}>
-    <Typography variant="h6" lineHeight={0.5}>
-      Scientia
-    </Typography>
-    <Typography variant="h6">Imóveis</Typography>
+    <img src="/logo.png" alt="logo" style={{ width: 110 }} />
   </Grid>
 );
 

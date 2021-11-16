@@ -40,8 +40,9 @@ const Property: FC<IParams> = ({ property = newProperty, handleClose }) => {
     try {
       setLoadingSave(true);
       const response = await Axios.post(`/properties`, editedProperty);
-      console.log(response.data);
+      setEditedProperty(response.data);
       setLoadingSave(false);
+      handleClose();
     } catch (error) {
       if (Axios.isAxiosError(error)) {
         showDialog({ title: 'Erro salvar imóvel', text: error.response?.data?.message });
