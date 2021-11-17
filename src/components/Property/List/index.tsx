@@ -109,7 +109,7 @@ const PropertyList = () => {
       title: 'Confirmar',
       text: 'Deseja deletar este imóvel?',
       actions: {
-        confirmText: 'Confirmar exclusão',
+        confirmText: 'Confirmar',
         cancelText: 'Cancelar',
         handleCancel: () => handleCloseDialog(),
         handleConfirm: () => handleConfirmDelete(id),
