@@ -3,7 +3,7 @@ import PropertyList from 'src/components/Property/List';
 
 const HomePage = () => (
   <Grid container justifyContent="center">
-    <Grid item padding={2} xs={12} sx={{ maxWidth: 1200 }}>
+    <Grid item padding={2} xs={12} sx={{ maxWidth: 1200, overflow: 'auto' }}>
       <PropertyList />
     </Grid>
   </Grid>
