@@ -1,8 +1,21 @@
-import { Dialog, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 
 export interface IDialogData {
   title: string;
   text: string;
+  actions?: {
+    confirmText: string;
+    cancelText: string;
+    handleConfirm: () => void;
+    handleCancel: () => void;
+  };
 }
 
 interface IParams {
@@ -17,6 +30,17 @@ const SimpleDialog = ({ dialogData, open, handleClose }: IParams) => (
     <DialogContent>
       <DialogContentText>{dialogData?.text}</DialogContentText>
     </DialogContent>
+
+    {dialogData?.actions && (
+      <DialogActions>
+        <Button onClick={dialogData.actions.handleCancel} autoFocus color="inherit">
+          {dialogData.actions.cancelText}
+        </Button>
+        <Button autoFocus onClick={dialogData.actions.handleConfirm} variant="contained">
+          {dialogData.actions.confirmText}
+        </Button>
+      </DialogActions>
+    )}
   </Dialog>
 );
 

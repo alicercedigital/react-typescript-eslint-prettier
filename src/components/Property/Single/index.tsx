@@ -1,5 +1,5 @@
 import { Button, Divider, Grid, Paper, TextField } from '@mui/material';
-import { FC, memo, useCallback, useState } from 'react';
+import React, { FC, memo, useCallback, useState } from 'react';
 import newProperty from 'src/helpers/newProperty';
 import { IProperty } from 'src/types/Property';
 import Axios from 'axios';
@@ -8,15 +8,18 @@ import SimpleDialog, { IDialogData } from 'src/components/SimpleDialog';
 import LoadingBackdrop from 'src/components/LoadingBackdrop';
 import PropertyAddress from './Address';
 import PropertyArea from './Area';
+import PropertyImage from './Image';
 import PropertyConstruction from './Construction';
 
 interface IParams {
   property?: IProperty;
   handleClose: () => void;
+  setRefresh: React.Dispatch<any>;
 }
 
-const Property: FC<IParams> = ({ property = newProperty, handleClose }) => {
+const Property: FC<IParams> = ({ property = newProperty, handleClose, setRefresh }) => {
   const [editedProperty, setEditedProperty] = useState(property);
+  const [newImagesFiles, setNewImagesFiles] = useState<FileList>();
 
   const handleChangeInput = useCallback((event) => {
     const { name, value, type, checked } = event.target;
@@ -36,13 +39,30 @@ const Property: FC<IParams> = ({ property = newProperty, handleClose }) => {
     });
     handleOpenDialog();
   };
+
   const handleSave = useCallback(async () => {
     try {
       setLoadingSave(true);
-      const response = await Axios.post(`/properties`, editedProperty);
-      setEditedProperty(response.data);
+
+      const formData = new FormData();
+
+      if (newImagesFiles) {
+        for (let i = 0; i < newImagesFiles.length; i += 1) {
+          formData.append('image', newImagesFiles[i]);
+        }
+      }
+
+      formData.append('data', JSON.stringify(editedProperty));
+
+      const response = await Axios.post(`/properties`, formData, {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      });
+
       setLoadingSave(false);
-      handleClose();
+      setEditedProperty(response.data);
+      setRefresh(Math.random());
     } catch (error) {
       if (Axios.isAxiosError(error)) {
         showDialog({ title: 'Erro salvar imóvel', text: error.response?.data?.message });
@@ -51,7 +71,7 @@ const Property: FC<IParams> = ({ property = newProperty, handleClose }) => {
       }
       setLoadingSave(false);
     }
-  }, [editedProperty]);
+  }, [editedProperty, newImagesFiles]);
 
   return (
     <>
@@ -82,7 +102,15 @@ const Property: FC<IParams> = ({ property = newProperty, handleClose }) => {
               <TextField
                 label="Custo por m² construido"
                 name="custoPorAreaConstruida"
-                value={editedProperty.custoPorAreaConstruida}
+                value={
+                  editedProperty &&
+                  editedProperty.valor &&
+                  editedProperty.areaConstruida &&
+                  editedProperty.valor > 0 &&
+                  editedProperty.areaConstruida > 0
+                    ? editedProperty.valor / editedProperty.areaConstruida
+                    : 'Dados não informados'
+                }
                 fullWidth
                 disabled
                 size="small"
@@ -92,14 +120,29 @@ const Property: FC<IParams> = ({ property = newProperty, handleClose }) => {
               <TextField
                 label="Custo por m² total"
                 name="custoPorAreaTotal"
-                value={editedProperty.custoPorAreaTotal}
+                value={
+                  editedProperty &&
+                  editedProperty.valor &&
+                  editedProperty.areaTerreno &&
+                  editedProperty.valor > 0 &&
+                  editedProperty.areaTerreno > 0
+                    ? editedProperty.valor / editedProperty.areaTerreno
+                    : 'Dados não informados'
+                }
                 fullWidth
                 size="small"
                 disabled
               />
             </Grid>
           </Grid>
-
+          <Grid item xs={12}>
+            <Divider />
+          </Grid>
+          <PropertyImage
+            newImagesFiles={newImagesFiles}
+            setNewImagesFiles={setNewImagesFiles}
+            editedProperty={editedProperty}
+          />
           {loadingSave && <LoadingBackdrop />}
           {openDialog && (
             <SimpleDialog

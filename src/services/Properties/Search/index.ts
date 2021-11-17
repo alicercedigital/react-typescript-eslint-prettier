@@ -16,7 +16,7 @@ const searchProperties = async ({
   sortBy = 'createdAt',
   sortDirection = 'asc',
 }: IParams) => {
-  const response = await Axios.get('/properties', {
+  const response = await Axios.get('/properties/search', {
     params: {
       searchText,
       limit,

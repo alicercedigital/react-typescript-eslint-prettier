@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import HomePage from 'src/pages/Home';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, darkScrollbar } from '@mui/material';
 import MainLayout from '../MainLayout';
 
 const App = () => {
@@ -14,6 +14,13 @@ const App = () => {
         main: '#01004c',
       },
       mode: 'dark',
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          body: darkScrollbar(),
+        },
+      },
     },
   });
 

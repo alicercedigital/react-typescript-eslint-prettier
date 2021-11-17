@@ -5,7 +5,9 @@ import reportWebVitals from './reportWebVitals';
 import App from './components/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-Axios.defaults.baseURL = 'https://scientia-imoveis-api.herokuapp.com/v1';
+// Axios.defaults.baseURL = 'https://scientia-imoveis-api.herokuapp.com/v1';
+Axios.defaults.baseURL = 'http://localhost:8000/v1';
+
 Axios.defaults.headers.common['token-admin'] = '827b~cmzD:;f9#dC~;UqL}WD9BL';
 
 ReactDOM.render(
