@@ -190,9 +190,10 @@ const PropertyList = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center">Tipo</TableCell>
+              <TableCell align="center" size="small">
+                Tipo
+              </TableCell>
               <TableCell align="center">Local</TableCell>
-
               <TableCell align="center">Área M²</TableCell>
               <TableCell align="center">Preço</TableCell>
               <TableCell align="center">Preço M²</TableCell>
@@ -208,7 +209,9 @@ const PropertyList = () => {
               >
                 <TableCell align="center">{property.tipo}</TableCell>
                 <TableCell align="center">
-                  <Typography noWrap> {property.cidade}</Typography>
+                  <Typography noWrap variant="caption">
+                    {property.cidade}
+                  </Typography>
                   <Typography noWrap> {property.bairro}</Typography>
                 </TableCell>
                 <TableCell align="center">{property.areaTerreno}</TableCell>
@@ -219,7 +222,7 @@ const PropertyList = () => {
                       comparativoBairros && comparativoBairros[property.bairro]
                         ? comparativoBairros[property.bairro].quantidadePorAreaTotal
                         : '0'
-                    }`}
+                    } no mesmo bairro`}
                   >
                     <Typography noWrap variant="caption">
                       {property.custoPorAreaConstruida && property.custoPorAreaConstruida > 0
@@ -243,14 +246,17 @@ const PropertyList = () => {
                       </Typography>
                       <Typography variant="caption">Área total</Typography>
                     </Grid>
-                    <Grid item container direction="column">
-                      <Typography variant="caption" noWrap>
-                        R$ {toRealString(property.custoPorAreaConstruida)}
-                      </Typography>
-                      <Typography variant="caption" noWrap>
-                        Construção
-                      </Typography>
-                    </Grid>
+
+                    {property.temConstrucao && (
+                      <Grid item container direction="column">
+                        <Typography variant="caption" noWrap>
+                          R$ {toRealString(property.custoPorAreaConstruida)}
+                        </Typography>
+                        <Typography variant="caption" noWrap>
+                          Construção
+                        </Typography>
+                      </Grid>
+                    )}
                   </Grid>
                 </TableCell>
                 <TableCell align="center">
