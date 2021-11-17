@@ -6,6 +6,7 @@ import Axios from 'axios';
 import useOpenCloseSwitch from 'src/hooks/useOpenCloseSwitch';
 import SimpleDialog, { IDialogData } from 'src/components/SimpleDialog';
 import LoadingBackdrop from 'src/components/LoadingBackdrop';
+import TextInput from 'src/components/Inputs/Text';
 import PropertyAddress from './Address';
 import PropertyArea from './Area';
 import PropertyImage from './Image';
@@ -96,6 +97,25 @@ const Property: FC<IParams> = ({ property = newProperty, handleClose, setRefresh
           />
           <Grid item xs={12}>
             <Divider />
+          </Grid>
+
+          <Grid item xs={12} container spacing={1} marginTop={1}>
+            <Grid item xs={12}>
+              <TextInput
+                label="Observações"
+                name="observacao"
+                value={editedProperty.observacao}
+                handleChange={handleChangeInput}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextInput
+                label="Link Imobiliária"
+                name="linkImobiliaria"
+                value={editedProperty.linkImobiliaria}
+                handleChange={handleChangeInput}
+              />
+            </Grid>
           </Grid>
           <Grid item xs={12} container spacing={1} marginTop={1}>
             <Grid item xs={6}>

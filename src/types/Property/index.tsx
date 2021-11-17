@@ -24,4 +24,6 @@ export interface IProperty {
   garagem?: number;
   acabamento: IPropertyAcabamento;
   custoPorAreaConstruida?: number;
+  observacao?: string;
+  linkImobiliaria?: string;
 }
