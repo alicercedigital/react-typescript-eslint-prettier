@@ -1,15 +1,15 @@
-import { Grid, Switch, Typography } from '@mui/material';
+import { Button, ButtonGroup, Grid, Typography } from '@mui/material';
 import { FC } from 'react';
 
 interface IParams {
   label: string;
-  value: boolean;
+  value?: boolean;
   name: string;
   handleChange: (event: any) => void;
 }
 
 const SwitchInput: FC<IParams> = ({ label, value, name, handleChange }) => (
-  <>
+  <Grid container alignItems="flex-start">
     <Typography
       variant="caption"
       sx={{
@@ -19,10 +19,40 @@ const SwitchInput: FC<IParams> = ({ label, value, name, handleChange }) => (
       {label}
     </Typography>
     <Grid container>
-      <Switch checked={value} onChange={handleChange} name={name} size="small" />
-      <Typography>{value ? 'Sim' : 'Não'}</Typography>
+      <ButtonGroup variant="contained" sx={{ maxHeight: '28px' }}>
+        <Button
+          size="small"
+          color={value === true ? 'primary' : 'inherit'}
+          sx={{ color: value === true ? '#fff' : '#777' }}
+          onClick={() =>
+            handleChange({
+              target: {
+                value: true,
+                name,
+              },
+            })
+          }
+        >
+          Não
+        </Button>
+        <Button
+          size="small"
+          color={value === false ? 'primary' : 'inherit'}
+          sx={{ color: value === false ? '#fff' : '#777' }}
+          onClick={() =>
+            handleChange({
+              target: {
+                value: false,
+                name,
+              },
+            })
+          }
+        >
+          Sim
+        </Button>
+      </ButtonGroup>
     </Grid>
-  </>
+  </Grid>
 );
 
 export default SwitchInput;

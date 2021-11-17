@@ -13,7 +13,7 @@ interface IParams {
 
 const PropertyConstruction: FC<IParams> = ({ editedProperty, handleChangeInput }) => (
   <Grid item xs={12} container spacing={1}>
-    <Grid item xs={3}>
+    <Grid item xs={4}>
       <SwitchInput
         label="Construção"
         name="temConstrucao"
@@ -21,14 +21,14 @@ const PropertyConstruction: FC<IParams> = ({ editedProperty, handleChangeInput }
         handleChange={handleChangeInput}
       />
     </Grid>
-    <Grid item xs={5}>
+    <Grid item xs={4}>
       <SelectOptions
         title="Acabamento"
         name="acabamento"
         value={editedProperty.acabamento}
         options={acabamentoOptions}
         handleChange={handleChangeInput}
-        width={135}
+        width={105}
       />
     </Grid>
     <Grid item xs={4}>

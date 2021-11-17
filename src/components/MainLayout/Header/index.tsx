@@ -1,4 +1,5 @@
-import { AppBar, Button, Grid, Toolbar } from '@mui/material';
+import { Menu } from '@mui/icons-material';
+import { AppBar, Grid, IconButton, Toolbar } from '@mui/material';
 import { FC } from 'react';
 import Logo from './Logo';
 
@@ -16,9 +17,9 @@ const Header: FC = () => (
         </Grid>
         <Grid item>
           <Grid container justifyContent="space-between" alignItems="center">
-            <Button color="secondary" variant="contained">
-              Imóveis
-            </Button>
+            <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+              <Menu />
+            </IconButton>
           </Grid>
         </Grid>
       </Grid>

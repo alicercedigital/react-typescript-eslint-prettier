@@ -4,12 +4,11 @@ import { FC, memo, ReactNode } from 'react';
 
 interface IParams {
   open: boolean;
-  handleClose: () => void;
   children: ReactNode;
 }
 
-const RightDrawer: FC<IParams> = ({ open, handleClose, children }: IParams) => (
-  <MuiDrawer anchor="right" open={open} onClose={handleClose}>
+const RightDrawer: FC<IParams> = ({ open, children }: IParams) => (
+  <MuiDrawer anchor="right" open={open}>
     <Box
       sx={{
         width: 360,
