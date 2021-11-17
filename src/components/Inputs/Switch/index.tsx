@@ -27,7 +27,7 @@ const SwitchInput: FC<IParams> = ({ label, value, name, handleChange }) => (
           onClick={() =>
             handleChange({
               target: {
-                value: false,
+                value: value === undefined || value === true ? false : undefined,
                 name,
               },
             })
@@ -42,7 +42,7 @@ const SwitchInput: FC<IParams> = ({ label, value, name, handleChange }) => (
           onClick={() =>
             handleChange({
               target: {
-                value: true,
+                value: value === undefined || value === false ? true : undefined,
                 name,
               },
             })
