@@ -22,12 +22,12 @@ const SwitchInput: FC<IParams> = ({ label, value, name, handleChange }) => (
       <ButtonGroup variant="contained" sx={{ maxHeight: '28px' }}>
         <Button
           size="small"
-          color={value === true ? 'primary' : 'inherit'}
-          sx={{ color: value === true ? '#fff' : '#777' }}
+          color={value === false ? 'primary' : 'inherit'}
+          sx={{ color: value === false ? '#fff' : '#777' }}
           onClick={() =>
             handleChange({
               target: {
-                value: true,
+                value: false,
                 name,
               },
             })
@@ -37,12 +37,12 @@ const SwitchInput: FC<IParams> = ({ label, value, name, handleChange }) => (
         </Button>
         <Button
           size="small"
-          color={value === false ? 'primary' : 'inherit'}
-          sx={{ color: value === false ? '#fff' : '#777' }}
+          color={value === true ? 'primary' : 'inherit'}
+          sx={{ color: value === true ? '#fff' : '#777' }}
           onClick={() =>
             handleChange({
               target: {
-                value: false,
+                value: true,
                 name,
               },
             })

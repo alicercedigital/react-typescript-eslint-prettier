@@ -1,8 +1,8 @@
 const toRealString = (value: any) => {
-  const realString = parseFloat(value).toLocaleString('pt-BR', {
+  const realString = (parseFloat(value) || 0).toLocaleString('pt-BR', {
     minimumFractionDigits: 2,
   });
-  return realString || 0;
+  return realString;
 };
 
 export default toRealString;

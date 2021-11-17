@@ -7,10 +7,12 @@ import useOpenCloseSwitch from 'src/hooks/useOpenCloseSwitch';
 import SimpleDialog, { IDialogData } from 'src/components/SimpleDialog';
 import LoadingBackdrop from 'src/components/LoadingBackdrop';
 import TextInput from 'src/components/Inputs/Text';
+import { ArrowBackIos, Save } from '@mui/icons-material';
 import PropertyAddress from './Address';
 import PropertyArea from './Area';
 import PropertyImage from './Image';
 import PropertyConstruction from './Construction';
+import PropertyHeader from './Header';
 
 interface IParams {
   property?: IProperty;
@@ -64,6 +66,7 @@ const Property: FC<IParams> = ({ property = newProperty, handleClose, setRefresh
       setLoadingSave(false);
       setEditedProperty(response.data);
       setRefresh(Math.random());
+      handleClose();
     } catch (error) {
       if (Axios.isAxiosError(error)) {
         showDialog({ title: 'Erro salvar imóvel', text: error.response?.data?.message });
@@ -78,6 +81,11 @@ const Property: FC<IParams> = ({ property = newProperty, handleClose, setRefresh
     <>
       <Grid container direction="column" sx={{ padding: 1.5 }}>
         <Grid container item alignItems="center" spacing={1} justifyContent="space-between">
+          <PropertyHeader editedProperty={editedProperty} />
+          <Grid item xs={12}>
+            <Divider />
+          </Grid>
+
           <PropertyAddress
             editedProperty={editedProperty}
             setEditedProperty={setEditedProperty}
@@ -176,18 +184,20 @@ const Property: FC<IParams> = ({ property = newProperty, handleClose, setRefresh
       <Paper
         sx={{
           position: 'fixed',
-          width: 360,
+          width: 380,
           bottom: -10,
+          borderRadius: 0,
           marginBottom: 1,
-          padding: 1,
+          padding: '8px 22px 10px 11px',
           zIndex: 100,
         }}
       >
         <Grid item xs={12} container justifyContent="space-between">
-          <Button onClick={handleClose} color="inherit">
+          <Button onClick={handleClose} color="inherit" startIcon={<ArrowBackIos />}>
             Cancelar
           </Button>
-          <Button onClick={handleSave} color="primary" variant="contained">
+
+          <Button onClick={handleSave} color="primary" variant="contained" startIcon={<Save />}>
             Salvar
           </Button>
         </Grid>

@@ -1,4 +1,4 @@
-import { Delete, Home } from '@mui/icons-material';
+import { Add, Delete, Home } from '@mui/icons-material';
 import {
   Paper,
   Table,
@@ -173,7 +173,12 @@ const PropertyList = () => {
   return (
     <>
       <Grid container justifyContent="flex-end" alignItems="center" marginBottom={1}>
-        <Button color="secondary" variant="contained" onClick={() => handleClickProperty()}>
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={() => handleClickProperty()}
+          startIcon={<Add />}
+        >
           Novo imóvel
         </Button>
       </Grid>
@@ -186,7 +191,7 @@ const PropertyList = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center">Tipo</TableCell>
-              <TableCell align="center">Cidade</TableCell>
+              <TableCell align="center">Local</TableCell>
 
               <TableCell align="center">Área M²</TableCell>
               <TableCell align="center">Preço</TableCell>
@@ -202,7 +207,10 @@ const PropertyList = () => {
                 onClick={() => handleClickProperty(property)}
               >
                 <TableCell align="center">{property.tipo}</TableCell>
-                <TableCell align="center">{property.cidade}</TableCell>
+                <TableCell align="center">
+                  <Typography noWrap> {property.cidade}</Typography>
+                  <Typography noWrap> {property.bairro}</Typography>
+                </TableCell>
                 <TableCell align="center">{property.areaTerreno}</TableCell>
                 <TableCell align="center">
                   <Typography noWrap>R$ {toRealString(property.valor)}</Typography>

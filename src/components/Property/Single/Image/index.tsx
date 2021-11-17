@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Grid, Typography, Box, ImageList, ImageListItem } from '@mui/material';
+import { Image } from '@mui/icons-material';
+import { Grid, ImageList, ImageListItem, Button } from '@mui/material';
 import React, { ChangeEvent, FC, memo, useEffect, useState } from 'react';
 import { IProperty } from 'src/types/Property';
 
@@ -32,20 +33,19 @@ const PropertyImage: FC<IParams> = ({ editedProperty, newImagesFiles, setNewImag
   return (
     <>
       <Grid item xs={12}>
-        <label htmlFor="image-upload">
-          <Typography sx={{ cursor: 'pointer' }}>Adicionar imagem</Typography>
-        </label>
-        <Box display="none">
+        <Button variant="contained" component="label" startIcon={<Image />}>
+          Adicionar imagem
           <input
+            hidden
             accept="image/jpeg"
             id="image-upload"
             type="file"
             onChange={handleUploadImage}
             multiple
           />
-        </Box>
+        </Button>
       </Grid>
-      <Grid xs={12} padding={1}>
+      <Grid xs={12} padding={1} item container alignItems="flex-start">
         <ImageList cols={2}>
           {imageTemporaryUrls.map((item) => (
             <ImageListItem key={item}>
