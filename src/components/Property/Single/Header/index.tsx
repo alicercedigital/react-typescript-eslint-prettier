@@ -91,8 +91,6 @@ const PropertyHeader = ({ editedProperty }: IParams) => {
       }
     }
 
-    console.log(scoreAcc, Math.round((scoreAcc / 5.2) * 2) / 2);
-
     setScore(Math.round((scoreAcc / 5.2) * 2) / 2);
     setScoreTips(scoreTipsAcc);
   };

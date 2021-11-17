@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, IconButton } from '@mui/material';
+import { CircularProgress, Grid, IconButton, Tooltip } from '@mui/material';
 import React, { FC, memo, useState } from 'react';
 import SelectOptions from 'src/components/SelectOptions';
 import { tipoOptions } from 'src/helpers/propertyOptions';
@@ -86,9 +86,11 @@ const PropertyAddress: FC<IParams> = ({
             }}
           />
         ) : (
-          <IconButton onClick={buscaCep} size="large">
-            <ManageSearch />
-          </IconButton>
+          <Tooltip title="Buscar endereço">
+            <IconButton onClick={buscaCep} size="large">
+              <ManageSearch />
+            </IconButton>
+          </Tooltip>
         )}
       </Grid>
       <Grid item xs={12}>
